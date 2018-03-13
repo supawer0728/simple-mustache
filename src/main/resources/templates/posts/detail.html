@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+</head>
+<body>
+<div class="container">
+    <table>
+        <tr>
+            <td>id</td>
+            <td>body</td>
+        </tr>
+        <tr>
+            {{#post}}
+            <td>{{id}}</td>
+            <td>{{body}}</td>
+            {{/post}}
+        </tr>
+    </table>
+</div>
+</body>
+</html>
