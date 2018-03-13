@@ -3,6 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Post</title>
+    <style>
+        table {
+            border: double 1px
+        }
+
+        tr {
+            border: solid 1px;
+        }
+
+        td {
+            border: solid 1px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -10,14 +23,14 @@
         <tr>
             <td>id</td>
             <td>body</td>
+            <td>doubled</td>
+            <td>3 times</td>
         </tr>
-        <tr>
-            {{#post}}
-            <td>{{id}}</td>
-            <td>{{body}}</td>
-            {{/post}}
-        </tr>
+        {{#post}}
+        {{>posts/post_item}}
+        {{/post}}
     </table>
+
 </div>
 </body>
 </html>
