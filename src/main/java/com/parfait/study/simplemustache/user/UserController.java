@@ -1,6 +1,6 @@
-package com.parfait.study.simplemustache.post;
+package com.parfait.study.simplemustache.user;
 
-import com.parfait.study.simplemustache.post.model.Post;
+import com.parfait.study.simplemustache.user.model.User;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,36 +14,36 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("/posts")
-public class PostController {
+@RequestMapping("/users")
+public class UserController {
 
-    private static final ParameterizedTypeReference<List<Post>> postsListType = new ParameterizedTypeReference<List<Post>>() {
+    private static final ParameterizedTypeReference<List<User>> postsListType = new ParameterizedTypeReference<List<User>>() {
     };
 
     @GetMapping
     public String getList(Model model) {
-        Mono<List<Post>> posts = WebClient.create("https://jsonplaceholder.typicode.com")
+        Mono<List<User>> posts = WebClient.create("https://jsonplaceholder.typicode.com")
                                           .get()
-                                          .uri("/posts")
+                                          .uri("/users")
                                           .retrieve()
                                           .bodyToMono(postsListType)
                                           .onErrorReturn(Collections.emptyList());
 
-        model.addAttribute("post", posts);
-        return "/posts/detail";
+        model.addAttribute("user", posts);
+        return "/users/list";
     }
 
     @GetMapping("/{id}")
-    public String getPost(@PathVariable Long id, Model model) {
+    public String getUser(@PathVariable Long id, Model model) {
 
-        Mono<Post> post = WebClient.create("https://jsonplaceholder.typicode.com")
+        Mono<User> post = WebClient.create("https://jsonplaceholder.typicode.com")
                                    .get()
-                                   .uri("/posts/{id}", id)
+                                   .uri("/users/{id}", id)
                                    .retrieve()
-                                   .bodyToMono(Post.class)
-                                   .onErrorReturn(Post.EMPTY);
+                                   .bodyToMono(User.class)
+                                   .onErrorReturn(User.EMPTY);
 
-        model.addAttribute("post", post);
-        return "/posts/detail";
+        model.addAttribute("user", post);
+        return "/users/detail";
     }
 }
